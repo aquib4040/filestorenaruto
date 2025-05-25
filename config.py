@@ -37,7 +37,6 @@ DB_URI = os.environ.get("DATABASE_URL", "")
 DB_NAME = os.environ.get("DATABASE_NAME", "")
 WEBSITE_URL_MODE = bool(environ.get('WEBSITE_URL_MODE', True)) # Set True or False
 WEBSITE_URL = environ.get("WEBSITE_URL", "https://kgnbotz.blogspot.com/2025/05/naruto.html")
-PUBLIC_FILE_STORE = is_enabled((environ.get('PUBLIC_FILE_STORE', "False")), True)
 
 #Time in seconds for message delete, put 0 to never delete
 TIME = int(os.environ.get("TIME", "3600"))
