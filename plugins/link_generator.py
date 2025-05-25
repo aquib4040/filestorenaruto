@@ -6,7 +6,7 @@ import re
 from pyrogram import filters, Client, enums
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram.errors.exceptions.bad_request_400 import ChannelInvalid, UsernameInvalid, UsernameNotModified
-from config import ADMINS, LOG_CHANNEL, PUBLIC_FILE_STORE, WEBSITE_URL, WEBSITE_URL_MODE
+from config import ADMINS, CHANNEL_ID, PUBLIC_FILE_STORE, WEBSITE_URL, WEBSITE_URL_MODE
 from plugins.users_api import get_user, get_short_link
 import re
 import os
@@ -32,7 +32,7 @@ async def allowed(_, __, message):
 async def incoming_gen_link(bot, message):
     username = (await bot.get_me()).username
     file_type = message.media
-    post = await message.copy(LOG_CHANNEL)
+    post = await message.copy(CHANNEL_ID)
     file_id = str(post.id)
     string = 'file_'
     string += file_id
@@ -61,7 +61,7 @@ async def gen_link_s(bot, message):
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
 # Ask Doubt on telegram @KingVJ01
     
-    post = await replied.copy(LOG_CHANNEL)
+    post = await replied.copy(CHANNEL_ID)
     file_id = str(post.id)
     string = f"file_"
     string += file_id
@@ -164,7 +164,7 @@ async def gen_link_batch(bot, message):
 
     with open(f"batchmode_{message.from_user.id}.json", "w+") as out:
         json.dump(outlist, out)
-    post = await bot.send_document(LOG_CHANNEL, f"batchmode_{message.from_user.id}.json", file_name="Batch.json", caption="⚠️ Batch Generated For Filestore.")
+    post = await bot.send_document(CHANNEL_ID, f"batchmode_{message.from_user.id}.json", file_name="Batch.json", caption="⚠️ Batch Generated For Filestore.")
     os.remove(f"batchmode_{message.from_user.id}.json")
     string = str(post.id)
     file_id = base64.urlsafe_b64encode(string.encode("ascii")).decode().strip("=")
